@@ -1,0 +1,100 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-title>Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-segment (ionChange)="onSegment($event)" value="categories" color="tertiary">
+    <ion-segment-button value="categories">
+      <ion-label>Categorias</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="products">
+      <ion-label>Productos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div id="categories" *ngIf="type === 'categories' || type === ''">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-list>
+            <ion-item-sliding *ngFor="let cat of categories$" (click)="onCategoryProducts(cat.id)">
+              <ion-item-options side="start">
+                <ion-item-option color="primary" (click)="onCategoryProducts(cat.id)">
+                  Ver Productos
+                </ion-item-option>
+              </ion-item-options>
+              <ion-item>
+                <ion-label>
+                  <h2>{{ cat.name }}</h2>
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="onDeleteCategory(cat.id)">Remover</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div id="produtc" *ngIf="type === 'products'">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ion-searchbar placeholder="Digite o producto a buscar" debounce="500"></ion-searchbar>
+          <ion-list>
+            <ion-item-sliding *ngFor="let pro of products$">
+              <ion-item-options side="start">
+                <ion-item-option color="primary" (click)="onAddProduct(pro)">
+                  <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="danger" (click)="onDeleteProduct(pro)">
+                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+              <ion-item (click)="onView(pro)">
+                <ion-badge color="medium" mode="ios" class="desabilitar" *ngIf="!pro.active">
+                  <ion-icon name="eye-off-outline" *ngIf="!pro.active"></ion-icon>
+                  Desabilitado
+                </ion-badge>
+                <ion-thumbnail slot="start">
+                  <img [ngClass]="{'product-disable': !pro.active }" [src]="pro.image.url" />
+                </ion-thumbnail>
+                <ion-label>
+                  <h2> {{ pro.name }} </h2>
+                  <h3 style="color: red; font-weight: 700;">
+                    {{ pro.price | currency }}
+                  </h3>
+                  <p>{{ pro.category.name }}</p>
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option color="success" (click)="onProductActive(pro, false)" *ngIf="pro.active">
+                  <ion-icon slot="icon-only" name="eye-off-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="warning" (click)="onProductActive(pro, true)" *ngIf="!pro.active">
+                  <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                </ion-item-option>
+                <ion-item-option color="dark" (click)="onView(pro)">
+                  <ion-icon slot="icon-only" name="document-outline"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button (click)="onAddProduct()">P</ion-fab-button>
+    <ion-fab-button (click)="onAddCategory()">C</ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

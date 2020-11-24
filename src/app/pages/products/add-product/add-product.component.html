@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" (click)="onClose()" fill="clear">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>Actualizar Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11">
+        <form [formGroup]="formProduct">
+          <ion-img [src]="item.image" *ngIf="item"></ion-img>
+          <br>
+          <div class="box-img" (click)="getPicture('camera')" *ngIf="!photo">
+            <ion-icon name="camera" slot="icon-only" size="large"></ion-icon>
+          </div>       
+          <img *ngIf="photo" [src]="photo" class="border-radius">
+          <ion-item>
+            <ion-label position="floating">Producto</ion-label>
+            <ion-input formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input formControlName="price" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Categoria</ion-label>
+            <ion-select placeholder="Seleccione" formControlName="category">
+              <ion-select-option *ngFor="let cat of categories$" [value]="cat">
+                {{ cat.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-textarea formControlName="description" rows="4"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label>Activo</ion-label>
+            <ion-toggle formControlName="active"></ion-toggle>
+          </ion-item>
+
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="onSave()" [disabled]="formProduct.disabled" expand="block" fill="clear" color="danger">
+      Guardar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

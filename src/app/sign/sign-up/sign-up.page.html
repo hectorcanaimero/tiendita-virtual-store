@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-text color="primary" class="ion-margin-bottom">
+    <h1 class="ion-text-center">Crear Tienda</h1>
+  </ion-text>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <form [formGroup]="formNewStore">
+          <ion-item>
+            <ion-label position="floating">Nombre de la Tienda<ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="name" required type="text" (ionChange)="onSlug($event)"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">slug <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="slug" required type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="email" required type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input formControlName="password" required type="password"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" [disabled]="formNewStore.invalid" expand="block" fill="clear">
+      Guardar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

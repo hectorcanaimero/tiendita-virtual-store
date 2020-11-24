@@ -1,0 +1,8 @@
+{
+  "name": "store",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

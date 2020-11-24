@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../../../assets/images/bg-login.png') center center;
+    // text-align: center;
+    // position: absolute;
+    // left: 0;
+    // right: 0;
+    // top: 50%;
+    // transform: translateY(-50%);
+}
+
+ion-content {
+    --background: url('../../../assets/images/bg-login.png') center center;
+    --background: #4d4b4b;
+
+    --color: #fff;
+}
+
+.box {
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.35);
+    ion-item{--background: none; }
+}
