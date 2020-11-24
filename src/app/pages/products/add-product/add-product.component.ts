@@ -46,6 +46,7 @@ export class AddProductComponent implements OnInit {
     }
     this.onLoad();
     timer(300).subscribe(() => {
+      console.log(this.item);
       if (this.item) {
         this.formProduct.patchValue({
           name: this.item.name,
@@ -102,7 +103,10 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-  onClose = () => this.modalCtrl.dismiss();
+  onClose = () => {
+    this.item = [];
+    this.modalCtrl.dismiss();
+  }
 
   async getPicture(type: string) {
     const image = await Camera.getPhoto({
@@ -124,5 +128,11 @@ export class AddProductComponent implements OnInit {
       (res) => this.img = { url: res.url, public_id: res.public_id },
       (err) => console.log(err)
     );
+  }
+
+  removeImage = () => {
+    const ite = this.util.removeImage(this.item.image.public_id);
+    ite.subscribe((res) => console.log(res));
+    // this.item.image = [];
   }
 }

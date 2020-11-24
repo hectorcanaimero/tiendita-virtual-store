@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PagesPage } from './pages.page';
+import { AuthGuard } from '../shared/services/auth.guard';
 
 const routes: Routes = [
   {
     path: 'pages',
     component: PagesPage,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',

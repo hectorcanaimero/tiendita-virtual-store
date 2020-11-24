@@ -21,7 +21,7 @@
           <ion-list>
             <ion-item>
               <ion-label>Abierto</ion-label>
-              <ion-toggle mode="ios"></ion-toggle>
+              <ion-toggle mode="ios" [ngModel]="active" (ionChange)="toogle($event)"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label *ngIf="store.slug">
@@ -58,7 +58,7 @@
             <ion-item>
               <ion-label>Editar</ion-label>
             </ion-item>
-            <ion-item>
+            <ion-item (click)="logout()">
               <ion-label>Cerrar Sesión</ion-label>
             </ion-item>
           </ion-list>

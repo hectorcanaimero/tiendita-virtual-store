@@ -2,11 +2,12 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AlertController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { DataService } from 'src/app/shared/services/data.service';
-
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +23,10 @@ export class SignInPage implements OnInit {
     private fb: FormBuilder,
     private db: DataService,
     private auth: AuthService,
-  ) { }
+    private alertCtrl: AlertController,
+    private util: UtilsService,
+  ) {
+  }
 
   ngOnInit() {
     this.onLoad();
@@ -41,11 +45,36 @@ export class SignInPage implements OnInit {
       }
     )
   }
-  onForgot = (email: string) => {
-    this.auth.forgotPassword(email).then(() => {
-      console.log('Enviado');
+
+  onForgot = async() => {
+    const alert = await this.alertCtrl.create({
+      header: 'Olvide mi contraseña :(',
+      inputs: [
+        {
+          name: 'email',
+          type: 'email',
+          placeholder: 'digite su email'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {}
+        }, {
+          text: 'Ok',
+          handler: (res) => {
+            this.auth.forgotPassword(res.email)
+            .then(() => this.util.setMessage(`Se envio las instrucciones a ${res.email}`))
+            .catch((err) => this.util.setMessage(`${err}`))
+          }
+        }
+      ]
     })
-  }
+    return await alert.present();
+  } 
+
 
   onLoad = () => {
     this.formLogin = this.fb.group({

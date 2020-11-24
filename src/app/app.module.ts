@@ -10,6 +10,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFirePerformanceModule } from '@angular/fire/performance';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     IonicModule.forRoot(),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFirePerformanceModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],

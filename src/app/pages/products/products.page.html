@@ -44,7 +44,7 @@
     <ion-grid fixed>
       <ion-row>
         <ion-col size="12">
-          <ion-searchbar placeholder="Digite o producto a buscar" debounce="500"></ion-searchbar>
+          <ion-searchbar mode="ios" placeholder="Digite o producto a buscar" debounce="500"></ion-searchbar>
           <ion-list>
             <ion-item-sliding *ngFor="let pro of products$">
               <ion-item-options side="start">
@@ -60,7 +60,7 @@
                   <ion-icon name="eye-off-outline" *ngIf="!pro.active"></ion-icon>
                   Desabilitado
                 </ion-badge>
-                <ion-thumbnail slot="start">
+                <ion-thumbnail slot="start" *ngIf="pro.image.url">
                   <img [ngClass]="{'product-disable': !pro.active }" [src]="pro.image.url" />
                 </ion-thumbnail>
                 <ion-label>
