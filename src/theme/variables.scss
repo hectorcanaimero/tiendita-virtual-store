@@ -230,3 +230,10 @@
     --ion-card-background: #1e1e1e;
   }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root, root[mode="md"], root[mode="ios"] {
+  --ion-font-family: 'Montserrat', sans-serif;
+  font-family: var(--ion-font-family) !important;
+}

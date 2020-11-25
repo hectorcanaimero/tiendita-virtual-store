@@ -31,6 +31,14 @@ const routes: Routes = [
         loadChildren: () => import('./banner/banner.module').then( m => m.BannerPageModule)
       },
       {
+        path: 'customer',
+        loadChildren: () => import('./customer/customer.module').then( m => m.CustomerPageModule)
+      },
+      {
+        path: 'menu',
+        loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+      },
+      {
         path: '',
         redirectTo: '/pages/home',
         pathMatch: 'full'

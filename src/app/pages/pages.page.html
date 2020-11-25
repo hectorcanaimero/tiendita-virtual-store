@@ -1,5 +1,5 @@
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" mode="ios" color="light">
     <ion-tab-button tab="home">
       <ion-icon name="home-outline"></ion-icon>
       <ion-label>Home</ion-label>
@@ -8,17 +8,18 @@
       <ion-icon name="bag-outline"></ion-icon>
       <ion-label>Productos</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="orders">
-      <ion-icon name="bookmarks-outline"></ion-icon>
-      <ion-label>Pedidos</ion-label>
-    </ion-tab-button>
     <ion-tab-button tab="banners">
       <ion-icon name="images-outline"></ion-icon>
       <ion-label>Publicidad</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="profile">
-      <ion-icon name="person-circle-outline"></ion-icon>
-      <ion-label>Cuenta</ion-label>
+    <ion-tab-button tab="menu">
+      <ion-icon name="menu-outline"></ion-icon>
+      <ion-label>Menu</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button color="light" (click)="onLink()">
+    <ion-icon name="basket-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

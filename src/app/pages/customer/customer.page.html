@@ -1,0 +1,37 @@
+<ion-content class="ion-padding-top">
+  <ion-searchbar placeholder="Digite..." (ionChange)="onSearch($event)" [debounce]="250" mode="ios"></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item-sliding *ngFor="let item of items$ | async">
+            <ion-item-options side="start">
+              <ion-item-option mode="ios" (click)="onClickPhone(item.phone)">
+                <ion-icon slot="icon-only" name="call-outline"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="success" (click)="onClickWhats(item)" mode="ios">
+                <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+        
+            <ion-item (click)="onView(item.id)">
+              <ion-label>
+                <p>{{ item.phone }}</p>
+                <h3>{{ item.name }}</h3>
+              </ion-label>
+            </ion-item>
+        
+            <ion-item-options side="end">
+              <ion-item-option (click)="onView(item.id)" mode="ios" color="dark">
+                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

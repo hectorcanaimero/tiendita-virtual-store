@@ -1,0 +1,14 @@
+.flex{
+    display: flex;
+    flex: row;
+    justify-content: center;
+    align-items: center;
+    div{
+        &:nth-child(1) {
+            width: 75%;
+        }
+        &:nth-child(2) {
+            width: 25%;
+        }
+    }
+}

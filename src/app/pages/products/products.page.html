@@ -60,7 +60,7 @@
                   <ion-icon name="eye-off-outline" *ngIf="!pro.active"></ion-icon>
                   Desabilitado
                 </ion-badge>
-                <ion-thumbnail slot="start" *ngIf="pro.image.url">
+                <ion-thumbnail slot="start" *ngIf="pro.image">
                   <img [ngClass]="{'product-disable': !pro.active }" [src]="pro.image.url" />
                 </ion-thumbnail>
                 <ion-label>
@@ -94,7 +94,11 @@
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
   <ion-fab-list side="top">
-    <ion-fab-button (click)="onAddProduct()">P</ion-fab-button>
-    <ion-fab-button (click)="onAddCategory()">C</ion-fab-button>
+    <ion-fab-button (click)="onAddProduct()" color="dark"  data-desc="Productos">
+      <ion-icon name="pricetag-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="onAddCategory()" color="danger"  data-desc="Categoria">
+      <ion-icon name="bookmark-outline"></ion-icon>
+    </ion-fab-button>
   </ion-fab-list>
 </ion-fab>

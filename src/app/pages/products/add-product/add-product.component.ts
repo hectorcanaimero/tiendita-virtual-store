@@ -49,7 +49,6 @@ export class AddProductComponent implements OnInit {
     }
     this.onLoad();
     timer(300).subscribe(() => {
-      console.log(this.item);
       if (this.item) {
         this.formProduct.patchValue({
           name: this.item.name,
@@ -73,6 +72,7 @@ export class AddProductComponent implements OnInit {
 
 
   _updateProduct = () => {
+    if (!this.item.image) this.formProduct.controls.image.setValue(this.img);
     this.data$.updateProduct(this.store.slug, this.item.id,this.formProduct.value)
     .then(() => this.util.setToast(`${ this.formProduct.value.name } fue actualizado`));
   }
@@ -134,7 +134,5 @@ export class AddProductComponent implements OnInit {
     this.activeCamera = false;
   }
 
-  removeImage = () => {
-    this.item.image = null;
-  }
+  removeImage = () => delete this.item.image;
 }

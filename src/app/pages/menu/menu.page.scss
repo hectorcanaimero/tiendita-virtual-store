@@ -1,0 +1,13 @@
+ion-card{
+    background-color: #fff;;
+    margin: 0;
+    ion-card-content{
+        .banner{
+            text-align: center;
+            ion-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    }
+}

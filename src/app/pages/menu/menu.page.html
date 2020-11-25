@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true" class="ion-padding-top">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card (click)="onLink('pages/customer')">
+          <ion-card-content>
+            <div class="banner">
+              <ion-icon name="people-outline" color="tertiary"></ion-icon>
+            </div>
+            <div>
+              <ion-label color="tertiary">
+                <h2 class="b-7 ion-text-center">Clientes</h2>
+              </ion-label>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card  (click)="onLink('pages/profile')">
+          <ion-card-content>
+            <div class="banner">
+              <ion-icon name="person-outline" color="medium"></ion-icon>
+            </div>
+            <div>
+              <ion-label color="medium">
+                <h2 class="b-7 ion-text-center">Cuenta</h2>
+              </ion-label>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

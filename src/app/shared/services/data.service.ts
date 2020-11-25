@@ -31,7 +31,7 @@ export class DataService {
   }
   getProductCategory = (store: string, category: string) => {
     return this.db.collection('store').doc(store).collection('products', ref => ref.where('category.id', '==', category))
-      .valueChanges().pipe(trace('getProdcutCategories'));
+      .snapshotChanges().pipe(trace('getProductsCategories'));
   }
 
   removeCategory = (store: string, id: string) => this.db.collection('store').doc(store).collection('categories').doc(id).delete();
@@ -44,5 +44,37 @@ export class DataService {
   }
   updateProduct = (store: string, id: string, data: any) => this.db.collection('store').doc(store).collection('products').doc(id).set(data);
   removeProduct = (store: string, id: string) => this.db.collection('store').doc(store).collection('products').doc(id).delete();
+  
   // Models Orders
+
+  getOrders = (store: string) => {
+    return this.db.collection('store').doc(store).collection('orders')
+    .snapshotChanges().pipe(trace('getOrders'));
+  }
+
+  getOrdersStatus = (store: string, status: number) => {
+    return this.db.collection('store').doc(store).collection('orders', ref => ref.where('status.id', '==', status))
+    .snapshotChanges().pipe(trace('getOrders'));
+  }
+
+  getOrdersCustomer = (store: string, id: string) => {
+    return this.db.collection('store').doc(store).collection('orders', ref => ref.where('customer.uid', '==', id))
+      .snapshotChanges().pipe(trace('getOrdersCustomer'));
+  }
+
+  getOrdersCustomerProduct = (store: string, customer: string, order: string) => {
+    return this.db.collection('store').doc(store).collection('orders', ref => ref.where('customer.uid', '==', customer))
+    .doc(order).collection('products').snapshotChanges().pipe(trace('getOrdersCustomerProducts'));
+  }
+
+
+  // Models Customer
+  getCustomers = (slug: string) => {
+    return this.db.collection('store').doc(slug).collection('customer')
+      .snapshotChanges().pipe(trace('getCustomers'));
+  }
+  getCustomerId = (slug: string, id: string) => {
+    return this.db.collection('store').doc(slug).collection('customer').doc(id)
+      .valueChanges().pipe(trace('getCustomerId'));
+  }
 }
