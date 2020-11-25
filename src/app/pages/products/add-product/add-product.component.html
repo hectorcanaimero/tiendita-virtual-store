@@ -12,11 +12,11 @@
       <ion-col size="12">
         <form [formGroup]="formProduct">
           <div class="position-image" *ngIf="item.image">
-            <ion-icon name="trash" color="danger" (click)="removeImage()"></ion-icon>
-            <ion-img [src]="item.image.url"></ion-img>
+            <ion-icon name="trash" color="warning" (click)="removeImage()"></ion-icon>
+            <ion-img [src]="item?.image.url"></ion-img>
           </div>
           <br>
-          <div class="box-img" (click)="getPicture('camera')" *ngIf="!item">
+          <div class="box-img" (click)="getPicture('camera')" *ngIf="activeCamera">
             <ion-icon name="camera" slot="icon-only" size="large"></ion-icon>
           </div>       
           <img *ngIf="photo" [src]="photo" class="border-radius">

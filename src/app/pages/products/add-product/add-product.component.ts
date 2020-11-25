@@ -21,14 +21,17 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AddProductComponent implements OnInit {
 
-  photo: SafeResourceUrl;
-  isDesktop: boolean;
-
   @Input() item: any = [];
+  
+  isDesktop: boolean;
+  activeCamera: boolean = true;
+  
+  photo: SafeResourceUrl;
   formProduct: FormGroup;
+
+  img:  any = [];
   store: any = [];
   categories$: any = [];
-  img:  any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -128,11 +131,10 @@ export class AddProductComponent implements OnInit {
       (res) => this.img = { url: res.url, public_id: res.public_id },
       (err) => console.log(err)
     );
+    this.activeCamera = false;
   }
 
   removeImage = () => {
-    const ite = this.util.removeImage(this.item.image.public_id);
-    ite.subscribe((res) => console.log(res));
-    // this.item.image = [];
+    this.item.image = null;
   }
 }
