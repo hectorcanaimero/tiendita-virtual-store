@@ -1,11 +1,5 @@
 {
-  "targets": {
-    "mi-tiendita-virtual": {
-      "hosting": {
-        "app": [
-          "mi-tiendita-virtual"
-        ]
-      }
-    }
+  "projects": {
+    "default": "mi-tiendita-virtual"
   }
 }

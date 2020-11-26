@@ -39,6 +39,10 @@ const routes: Routes = [
         loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
       },
       {
+        path: 'push',
+        loadChildren: () => import('./push/push.module').then( m => m.PushPageModule)
+      },
+      {
         path: '',
         redirectTo: '/pages/home',
         pathMatch: 'full'

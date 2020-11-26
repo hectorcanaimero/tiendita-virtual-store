@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxOneSignalModule } from 'ngx-onesignal';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFirestoreModule,
     AngularFirePerformanceModule,
     AngularFireModule.initializeApp(environment.firebase),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('OneSignalSDKWorker.js', { enabled: environment.production }),
+    NgxOneSignalModule.forRoot({ 
+      appId: '9a783d43-3500-440e-b736-58db7c724a99',
+      autoRegister: false,
+      allowLocalhostAsSecureOrigin: true,
+      notifyButton: { enabled: true },
+    }),
   ],
   providers: [
     StatusBar,

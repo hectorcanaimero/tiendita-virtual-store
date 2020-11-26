@@ -1,3 +1,4 @@
+import { AuthService } from './../../shared/services/auth.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class MenuPage implements OnInit {
 
   constructor(
+    private auth: AuthService,
     private navCtrl: NavController
   ) { }
 
@@ -16,5 +18,5 @@ export class MenuPage implements OnInit {
   }
 
   onLink = (url: string) => this.navCtrl.navigateForward(url);
-
+  logout = () => this.auth.signOut();
 }

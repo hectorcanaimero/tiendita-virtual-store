@@ -75,4 +75,5 @@ export class CategoryProductsComponent implements OnInit {
     })
     return await alert.present();
   }
+  onView = (item: any) => console.log(item);
 }

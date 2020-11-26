@@ -1,3 +1,80 @@
-<p>
-  detail works!
-</p>
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-title color="danger">
+      <span *ngIf="item.status.id === 1">En Proceso</span>
+      <span *ngIf="item.status.id === 2">Despachado</span>
+      <span *ngIf="item.status.id === 3">Entregado</span>
+      <span *ngIf="item.status.id === 4">Cancelado</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-top">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label color="primary">
+          <p>Pédido:</p>
+          <h2>{{ item.id }}</h2>
+        </ion-label>
+        <ion-label>
+          <h1 class="ion-padding-top b-7">{{ item.customer.name }}</h1>
+        </ion-label>
+        <ion-label>
+          <h3> {{ item.customer.email }}</h3>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size=6>
+        <ion-label>
+          <p>Identificación:</p>
+          <h3>{{ item.customer.cedula }}</h3>
+        </ion-label>
+      </ion-col>
+      <ion-col size=6>
+        <ion-label>
+          <p>Teléfono:</p>
+          <h3>{{ item.customer.phone }}</h3>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>
+          <h3>Dirección: {{ item.customer.address }}</h3>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item *ngFor="let product of products$ | async">
+            <ion-label>
+              <p>Cant: {{product.qtd }}</p>
+              <h4 class="ion-text-wrap">{{ product.name }}</h4>
+              <p>Valor: {{ product.total | currency }}</p>
+              <ion-label *ngIf="product?.observations" color="danger">
+                <p class="b-6">Observaciones</p>
+                <p class="ion-text-wrap">{{ product.observations }}</p>
+              </ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="onStatus(item)" expand="block" color="primary" shape="round">
+          Cambiar Status
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="onClose()" expand="block" fill="clear" color="danger">
+      Cerrar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

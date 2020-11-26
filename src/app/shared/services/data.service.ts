@@ -52,9 +52,15 @@ export class DataService {
     .snapshotChanges().pipe(trace('getOrders'));
   }
 
+  getOrdersProduct = (store: string, order: string) => {
+    return this.db.collection('store').doc(store).collection('orders').doc(order).collection('products')
+    .snapshotChanges().pipe(trace('getOrderProducts'));
+  }
+
+
   getOrdersStatus = (store: string, status: number) => {
     return this.db.collection('store').doc(store).collection('orders', ref => ref.where('status.id', '==', status))
-    .snapshotChanges().pipe(trace('getOrders'));
+    .snapshotChanges().pipe(trace('getOrdersStatus'));
   }
 
   getOrdersCustomer = (store: string, id: string) => {

@@ -1,3 +1,10 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="pages/menu"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding-top">
   <ion-searchbar placeholder="Digite..." (ionChange)="onSearch($event)" [debounce]="250" mode="ios"></ion-searchbar>
   <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">

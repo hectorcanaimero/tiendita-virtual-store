@@ -20,6 +20,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/OneSignalSDKWorker.js",
+              "src/OneSignalSDKUpdaterWorker.js",
               {
                 "glob": "**/*",
                 "input": "src/assets",

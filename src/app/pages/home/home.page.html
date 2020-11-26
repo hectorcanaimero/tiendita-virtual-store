@@ -8,6 +8,23 @@
 <ion-content>
   <ion-grid fixed>
     <ion-row>
+      <ion-col size="12">
+        <ion-label>
+          <p> USER ID: {{onesignal.userId$ | async}}</p>
+          <p> TAGS: {{tags$ | async | json}}</p>
+        
+          <p> is subscribe: {{onesignal.isSubscribe$ | async}}</p>
+          <p> is subscribe: {{onesignal.subscribeState$ | async | json}}</p>
+          <p> is supported: {{onesignal.isSupported$ | async}}</p>
+        
+        </ion-label>
+        <ion-button color="primary" (click)="onSubscribe()" >subscribe</ion-button><br>
+        <ion-button color="danger" (click)="onUnSubscribe()" >unsubscribe</ion-button><br>
+        <ion-button color="tertiary" (click)="testPush()" >TestPushMethod</ion-button><br>
+        <ion-button color="dark" (click)="getTags()" >getTag</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col size="6">
         <ion-card class="widget">
           <ion-card-content>

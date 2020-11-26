@@ -1,4 +1,4 @@
-<ion-header mode="ios">
+<ion-header mode="ios" class="ion-no-border">
   <ion-toolbar mode="ios">
     <ion-title>Productos</ion-title>
   </ion-toolbar>
@@ -7,7 +7,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-segment (ionChange)="onSegment($event)" value="categories" color="tertiary">
+  <ion-segment (ionChange)="onSegment($event)" value="categories" color="tertiary" mode="ios">
     <ion-segment-button value="categories">
       <ion-label>Categorias</ion-label>
     </ion-segment-button>

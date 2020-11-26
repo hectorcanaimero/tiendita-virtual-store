@@ -7,7 +7,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-segment scrollable (ionChange)="onSegment($event)">
+  <ion-segment (ionChange)="onSegment($event)" value="proccess" color="tertiary"  mode="ios">
     <ion-segment-button value="proccess">
       <ion-label>
         <h3 class="ion-padding-horizontal">En Proceso</h3>
@@ -33,7 +33,7 @@
     <ion-list class="ion-padding-top">
       <ion-item-sliding *ngFor="let order of ordersProccess$ | async">
         <ion-item-options side="start">
-          <ion-item-option color="primary" mode="ios">
+          <ion-item-option color="primary" mode="ios" (click)="onStatus(order)">
             <ion-icon slot="icon-only" name="create-outline"></ion-icon>
           </ion-item-option>
           <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">
@@ -42,7 +42,7 @@
         </ion-item-options>
         <ion-item (click)="onView(order)">
           <ion-label>
-            <ion-label color="warning">
+            <ion-label color="primary">
               <h4>Pedido: {{ order.id }}</h4>
             </ion-label>
             <ion-label>
@@ -72,7 +72,7 @@
     <ion-list class="ion-padding-top">
       <ion-item-sliding *ngFor="let order of ordersDelivery$ | async">
         <ion-item-options side="start">
-          <ion-item-option color="primary" mode="ios">
+          <ion-item-option color="primary" mode="ios" (click)="onStatus(order)">
             <ion-icon slot="icon-only" name="create-outline"></ion-icon>
           </ion-item-option>
           <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">
@@ -111,7 +111,7 @@
     <ion-list class="ion-padding-top">
       <ion-item-sliding *ngFor="let order of ordersPaid$ | async">
         <ion-item-options side="start">
-          <ion-item-option color="primary" mode="ios">
+          <ion-item-option color="primary" mode="ios" (click)="onStatus(order)">
             <ion-icon slot="icon-only" name="create-outline"></ion-icon>
           </ion-item-option>
           <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">

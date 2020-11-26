@@ -30,6 +30,7 @@
     "@ionic/pwa-elements": "^3.0.1",
     "cordova-plugin-camera": "^5.0.1",
     "firebase": "^8.1.1",
+    "ngx-onesignal": "^10.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1100",
     "@angular-devkit/build-angular": "~0.1000.0",
+    "@angular/cdk": "^10.2.6",
     "@angular/cli": "~10.0.5",
     "@angular/compiler": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",

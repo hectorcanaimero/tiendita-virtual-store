@@ -15,6 +15,7 @@ export const environment = {
     storageBucket: "mi-tiendita-virtual.appspot.com",
     messagingSenderId: "804963636791",
     appId: "1:804963636791:web:7e736a349666fa019451b2",
-    measurementId: "G-2DTQZLHNCP"
+    measurementId: "G-2DTQZLHNCP",
+    vapidKey: "BIUCVk3KBPQUinuHd2nmPquDv1hu-6h2g7AXY1IAIHdTDcrcIrB5y5U6ps4VSc6FwEp7d3VXzCghJ1yujdJE10o",
   }
 };
