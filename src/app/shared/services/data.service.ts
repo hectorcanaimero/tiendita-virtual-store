@@ -67,6 +67,9 @@ export class DataService {
     .doc(order).collection('products').snapshotChanges().pipe(trace('getOrdersCustomerProducts'));
   }
 
+  updateOrders = (store: string, orders: string, data: any) => {
+    return this.db.collection('store').doc(store).collection('orders').doc(orders).set(data);
+  }
 
   // Models Customer
   getCustomers = (slug: string) => {

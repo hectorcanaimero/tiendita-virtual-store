@@ -3,35 +3,183 @@
     <ion-title>Pedidos</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-list>
-    <ion-item-sliding *ngFor="let order of orders$ | async">
-      <ion-item-options side="start">
-        <ion-item-option color="primary">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger">
-          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-      <ion-item>
-        <ion-label>
-          <p> {{ order.c_at.toDate() | date:'short' }} </p>
-          <h1>{{ order.customer.name }}</h1>
-          <h2 style="color: red; font-weight: 600;">
-            Total: {{ order.total | currency }}
-          </h2>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="warning">
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="dark">
-          <ion-icon slot="icon-only" name="document-outline"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-segment scrollable (ionChange)="onSegment($event)">
+    <ion-segment-button value="proccess">
+      <ion-label>
+        <h3 class="ion-padding-horizontal">En Proceso</h3>
+      </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="delivery">
+      <ion-label>
+        <h3 class="ion-padding-horizontal">Despachado</h3>
+      </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="paid">
+      <ion-label>
+        <h3 class="ion-padding-horizontal">Entregado</h3>
+      </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="trash">
+      <ion-label>
+        <h3 class="ion-padding-horizontal">Cancelado</h3>
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="type === 'proccess' || type === ''">
+    <ion-list class="ion-padding-top">
+      <ion-item-sliding *ngFor="let order of ordersProccess$ | async">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" mode="ios">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item (click)="onView(order)">
+          <ion-label>
+            <ion-label color="warning">
+              <h4>Pedido: {{ order.id }}</h4>
+            </ion-label>
+            <ion-label>
+              <h1>{{ order.customer.name }}</h1>
+            </ion-label>
+            <div class="flex">
+              <div>
+                <p> {{ order.c_at.toDate() | date:'short' }} </p>
+              </div>
+              <div>
+                <h2 class="ion-text-right b-6" style="color: rgb(150, 14, 14)">
+                  Total: {{ order.total | currency }}
+                </h2>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="warning"  mode="ios" (click)="onView(order)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <div *ngIf="type === 'delivery'">
+    <ion-list class="ion-padding-top">
+      <ion-item-sliding *ngFor="let order of ordersDelivery$ | async">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" mode="ios">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item (click)="onView(order)">
+          <ion-label>
+            <ion-label color="warning">
+              <h4>Pedido: {{ order.id }}</h4>
+            </ion-label>
+            <ion-label>
+              <h1>{{ order.customer.name }}</h1>
+            </ion-label>
+            <div class="flex">
+              <div>
+                <p> {{ order.c_at.toDate() | date:'short' }} </p>
+              </div>
+              <div>
+                <h2 class="ion-text-right b-6" style="color: rgb(150, 14, 14)">
+                  Total: {{ order.total | currency }}
+                </h2>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="warning"  mode="ios" (click)="onView(order)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <div *ngIf="type === 'paid'">
+    <ion-list class="ion-padding-top">
+      <ion-item-sliding *ngFor="let order of ordersPaid$ | async">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" mode="ios">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" mode="ios" (click)="onTrash(order)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item (click)="onView(order)">
+          <ion-label>
+            <ion-label color="warning">
+              <h4>Pedido: {{ order.id }}</h4>
+            </ion-label>
+            <ion-label>
+              <h1>{{ order.customer.name }}</h1>
+            </ion-label>
+            <div class="flex">
+              <div>
+                <p> {{ order.c_at.toDate() | date:'short' }} </p>
+              </div>
+              <div>
+                <h2 class="ion-text-right b-6" style="color: rgb(150, 14, 14)">
+                  Total: {{ order.total | currency }}
+                </h2>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="warning"  mode="ios" (click)="onView(order)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <div *ngIf="type === 'trash'">
+    <ion-list class="ion-padding-top">
+      <ion-item-sliding *ngFor="let order of ordersTrash$ | async">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" mode="ios" ((click)="onStatus(order)")>
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item (click)="onView(order)">
+          <ion-label>
+            <ion-label color="warning">
+              <h4>Pedido: {{ order.id }}</h4>
+            </ion-label>
+            <ion-label>
+              <h1>{{ order.customer.name }}</h1>
+            </ion-label>
+            <div class="flex">
+              <div>
+                <p> {{ order.c_at.toDate() | date:'short' }} </p>
+              </div>
+              <div>
+                <h2 class="ion-text-right b-6" style="color: rgb(150, 14, 14)">
+                  Total: {{ order.total | currency }}
+                </h2>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="warning"  mode="ios" (click)="onView(order)">
+            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
 </ion-content>
