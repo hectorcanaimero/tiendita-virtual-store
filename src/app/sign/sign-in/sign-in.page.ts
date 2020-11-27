@@ -1,3 +1,4 @@
+import { PushService } from './../../shared/services/push.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,8 +22,9 @@ export class SignInPage implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private db: DataService,
-    private auth: AuthService,
+    private push$: PushService,
+    private data$: DataService,
+    private auth$: AuthService,
     private alertCtrl: AlertController,
     private util: UtilsService,
   ) {
@@ -35,11 +37,14 @@ export class SignInPage implements OnInit {
   onSubmit = () => {
     if (this.formLogin.invalid) return;
     const item = this.formLogin.value;
-    this.auth.signIn(item.email, item.password).then(
+    this.auth$.signIn(item.email, item.password).then(
       data => {
         localStorage.setItem('user', data.user.uid);
-        this.db.existsWithStore('uid', data.user.uid).pipe(map((res)=>res[0])).subscribe((res) => {
+        this.data$.existsWithStore('uid', data.user.uid).pipe(map((res)=>res[0])).subscribe((res) => {
+          this.push$.requestPermission().subscribe(token => res.token = token);
+          console.log(res);
           localStorage.setItem('store', JSON.stringify(res));
+          // this.data$.updateStore(res.slug, res).then(res => res);
           this.router.navigate(['pages', 'home']);
         });
       }

@@ -17,7 +17,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgxOneSignalModule } from 'ngx-onesignal';
 
 @NgModule({
   declarations: [AppComponent],

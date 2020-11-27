@@ -15,6 +15,7 @@ export class DataService {
 
   // Models Store
   addStore = (data: any) => this.db.collection('store').doc(data.slug).set(data);
+  updateStore = (id: string, data: any) => this.db.collection('store').doc(id).set(data);
   existsWithStore = (field: string, value: string) => {
     return  this.db.collection('store', ref => ref.where(field, '==', value)).valueChanges().pipe(trace('getStore'));
   }
