@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { OneSignalService } from 'ngx-onesignal';
 
 
 @Component({
@@ -16,18 +15,12 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    public readonly onesignal: OneSignalService,
   ) {
-    (window as any).ngxOnesignal = this.onesignal;
     this.initializeApp();
   }
 
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.onesignal.subscribe();
-      console.log(`Initiated`);
-    }, 2000);
   }
 
   initializeApp() {

@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFirePerformanceModule } from '@angular/fire/performance';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,15 +29,10 @@ import { NgxOneSignalModule } from 'ngx-onesignal';
     IonicModule.forRoot(),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireMessagingModule,
     AngularFirePerformanceModule,
     AngularFireModule.initializeApp(environment.firebase),
-    ServiceWorkerModule.register('OneSignalSDKWorker.js', { enabled: environment.production }),
-    NgxOneSignalModule.forRoot({ 
-      appId: '9a783d43-3500-440e-b736-58db7c724a99',
-      autoRegister: false,
-      allowLocalhostAsSecureOrigin: true,
-      notifyButton: { enabled: true },
-    }),
+    ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production }),
   ],
   providers: [
     StatusBar,

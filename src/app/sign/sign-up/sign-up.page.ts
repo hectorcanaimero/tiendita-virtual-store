@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireMessaging } from '@angular/fire/messaging';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from 'src/app/shared/services/data.service';
@@ -15,14 +16,17 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 })
 export class SignUpPage implements OnInit {
 
+  token: string = '';
   formNewStore: FormGroup;
+
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private auth: AuthService,
     private data: DataService,
-    private util: UtilsService
+    private util: UtilsService,
+    private afMessaging: AngularFireMessaging,
   ) { }
 
   ngOnInit() {
@@ -30,6 +34,7 @@ export class SignUpPage implements OnInit {
   }
 
   onSubmit = () => {
+    this.afMessaging.requestToken.subscribe((token) =>  this.token = token);
     let count = 0;
     if (this.formNewStore.invalid) return;
     const item = this.formNewStore.value;
@@ -41,7 +46,8 @@ export class SignUpPage implements OnInit {
             uid: data.user.uid,
             name: item.name,
             slug: item.slug,
-            email: item.email
+            email: item.email,
+            token: this.token
           }
           this.data.addStore(add).then((res) => res);
           localStorage.setItem('user', data.user.uid);
