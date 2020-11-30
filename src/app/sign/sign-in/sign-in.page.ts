@@ -41,10 +41,9 @@ export class SignInPage implements OnInit {
       data => {
         localStorage.setItem('user', data.user.uid);
         this.data$.existsWithStore('uid', data.user.uid).pipe(map((res)=>res[0])).subscribe((res) => {
-          this.push$.requestPermission().subscribe(token => res.token = token);
-          console.log(res);
+          this.push$.requestPermission().subscribe(token => res['token'] = token);
           localStorage.setItem('store', JSON.stringify(res));
-          // this.data$.updateStore(res.slug, res).then(res => res);
+          this.data$.updateStore(res['slug'], res).then(res => res);
           this.router.navigate(['pages', 'home']);
         });
       }
@@ -70,7 +69,7 @@ export class SignInPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (res) => {
-            this.auth.forgotPassword(res.email)
+            this.auth$.forgotPassword(res.email)
             .then(() => this.util.setMessage(`Se envio las instrucciones a ${res.email}`))
             .catch((err) => this.util.setMessage(`${err}`))
           }

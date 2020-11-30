@@ -24,7 +24,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.count = this.data$.getCustomers(this.store.slug).pipe(map((res) => res.length));
-    this.push$.requestPermission().subscribe((res) => console.log(res));
     this.push$.receiveMessage();
     this.message = this.push$.currentMessage;
     console.log(this.push$.currentMessage);

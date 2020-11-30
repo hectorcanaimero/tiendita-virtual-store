@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AddComponent } from './add/add.component';
 
 @Component({
   selector: 'app-banner',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {
+  }
+
+  add = async () => {
+    const modal = await this.modalCtrl.create({
+      component: AddComponent
+    });
+    modal.present();
   }
 
 }
