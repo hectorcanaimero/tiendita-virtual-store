@@ -13,6 +13,11 @@ export class PushService {
     constructor(private angularFireMessaging: AngularFireMessaging) {
         this.angularFireMessaging.messages.subscribe((res) => {
             console.log(res);
+<<<<<<< Updated upstream
+=======
+            // res.onMessages = res.onMessage.bind(res);
+            // res.onTokenRefresh = res.onTokenRefresh.bind(res);
+>>>>>>> Stashed changes
         });
     }
 
