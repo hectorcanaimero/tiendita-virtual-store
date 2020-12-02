@@ -43,6 +43,10 @@ const routes: Routes = [
         loadChildren: () => import('./push/push.module').then( m => m.PushPageModule)
       },
       {
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+      },
+      {
         path: '',
         redirectTo: '/pages/home',
         pathMatch: 'full'

@@ -87,4 +87,12 @@ export class DataService {
     return this.db.collection('store').doc(slug).collection('customer').doc(id)
       .valueChanges().pipe(trace('getCustomerId'));
   }
+
+  // Models Carousel
+  addCarousel = (store: string, data: any) => this.db.collection('store').doc(store).collection('carousel').add(data);
+  updateCarousel = (store: string, carousel: string, data: any) => this.db.collection('store').doc(store).collection('carousel').doc(carousel).set(data);
+  getCarousels = (slug: string) => {
+    return this.db.collection('store').doc(slug).collection('carousel', ref => ref.orderBy('order'))
+      .snapshotChanges().pipe(trace('getCarousels'));
+  }
 }

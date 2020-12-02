@@ -30,11 +30,12 @@ export class UtilsService {
   }
 
 
+  sort = (elem: string, data: any) => data.sort((a:any, b: any) => (a[elem] > b[elem]) ? 1 : ((b[elem] > a[elem]) ? -1 : 0));
+
   buildSlug = (str: string) => {
-    str = str.replace(/^\s+|\s+$/g, '');
-    str = str.toLowerCase();
-    const from = 'àáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
     const to = 'aaaaaeeeeiiiioooouuuunc------';
+    const from = 'àáãäâèéëêìíïîòóöôùúüûñç·/_,:;';
+    str = str.replace(/^\s+|\s+$/g, '').toLowerCase();
     for (let i = 0, l = from.length; i < l; i++) str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     str = str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-'); 
     return str;

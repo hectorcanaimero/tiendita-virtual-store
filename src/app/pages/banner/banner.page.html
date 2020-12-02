@@ -5,7 +5,37 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar mode="ios" placeholder="Digite o producto a buscar" debounce="500"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-list-header>
+            <ion-label></ion-label>
+            <ion-button fill="outline" *ngIf="active" (click)="order()">{{ text }}</ion-button>
+            <ion-button fill="outline" *ngIf="!active" (click)="orderSave()"> {{ text }}</ion-button>
+          </ion-list-header>
+          <ion-reorder-group [disabled]="active" (ionItemReorder)="doReorder($event)">
+            <ion-item (click)="onAction(item)" *ngFor="let item of items$; let i = index">
+              <ion-thumbnail slot="start" *ngIf="item.image.url">
+                <img [src]="item.image.url" />
+              </ion-thumbnail>
+              <ion-label>
+                <h2> {{ item.name }} </h2>
+                <p>Inicio: {{ item.start | date:'short' }}</p>
+                <p>Fin: {{ item.end | date:'short' }}</p>
+              </ion-label>
+              <ion-reorder slot="end"></ion-reorder>
+            </ion-item>
+          </ion-reorder-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="add()">

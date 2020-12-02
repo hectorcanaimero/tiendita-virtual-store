@@ -24,8 +24,6 @@ export class AddProductComponent implements OnInit {
   @Input() item: any = [];
   
   isDesktop: boolean;
-  activeCamera: boolean = true;
-  
   photo: SafeResourceUrl;
   formProduct: FormGroup;
 
@@ -131,7 +129,6 @@ export class AddProductComponent implements OnInit {
       (res) => this.img = { url: res.url, public_id: res.public_id },
       (err) => console.log(err)
     );
-    this.activeCamera = false;
   }
 
   removeImage = () => delete this.item.image;

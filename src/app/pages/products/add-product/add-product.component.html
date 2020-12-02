@@ -16,7 +16,7 @@
             <ion-img [src]="item?.image.url"></ion-img>
           </div>
           <br>
-          <div class="box-img" (click)="getPicture('camera')" *ngIf="!item?.image">
+          <div class="box-img" (click)="getPicture('camera')" *ngIf="!item?.image || !photo">
             <ion-icon name="camera" slot="icon-only" size="large"></ion-icon>
           </div>       
           <img *ngIf="photo" [src]="photo" class="border-radius">
@@ -52,7 +52,7 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-button (click)="onSave()" [disabled]="formProduct.disabled" expand="block" fill="clear" color="danger">
+    <ion-button (click)="onSave()" [disabled]="formProduct.invalid" expand="block" fill="clear" color="danger">
       Guardar
     </ion-button>
   </ion-toolbar>
